@@ -81,20 +81,20 @@ class MLPlay:
                 if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
                     middle = min(middle, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
 
-            jun = ['left']
-            if right < left:
+            jun = ['middle']
+            if right < middle:
                 jun.insert(0, 'right')
             else:
                 jun.insert(1, 'right')
-            if middle < left and middle < right:
-                jun.insert(0, 'middle')
-            elif middle >= left and middle >= right:
-                jun.insert(2, 'middle')
+            if left < middle and left < right:
+                jun.insert(0, 'left')
+            elif left >= middle and left >= right:
+                jun.insert(2, 'left')
             else:
-                jun.insert(1, 'middle')
-            if 1 in grid and 4 in grid:
+                jun.insert(1, 'left')
+            if 4 in grid:
                 jun.remove('left')
-            if 3 in grid and 6 in grid:
+            if 6 in grid:
                 jun.remove('right')
             if jun[0] == 'left':
                 side = -1
