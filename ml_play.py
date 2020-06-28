@@ -31,6 +31,7 @@ class MLPlay:
             speed_ahead = 100
             left = 0
             right = 0
+            middle = 0
             side = 0
             if self.car_pos[0] <= 65: # left bound
                 grid.add(1)
@@ -73,11 +74,15 @@ class MLPlay:
                     left += self.car_pos[0] - coin[0]
                 if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1] - 30:
                     right += coin[0] - self.car_pos[0]
+                if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1] - 30:
+                    middle += 10
             if left <= 20 and right <= 20:
                 side = 0
-            elif left <= right:
+            elif middle <= left and middle <= right:
+                side = 0
+            elif left <= right and left <= middle:
                 side = -1
-            elif right <= left:
+            elif right <= left and right <= middle:
                 side = 1
             else:
                 side = 0
