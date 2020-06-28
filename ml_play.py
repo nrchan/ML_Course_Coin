@@ -31,7 +31,6 @@ class MLPlay:
             speed_ahead = 100
             left = 0
             right = 0
-            middle = 0
             side = 0
             if self.car_pos[0] <= 65: # left bound
                 grid.add(1)
@@ -46,7 +45,7 @@ class MLPlay:
                 if car["id"] != self.player_no:
                     x = self.car_pos[0] - car["pos"][0] # x relative position
                     y = self.car_pos[1] - car["pos"][1] # y relative position
-                    if x <= 40 and x >= -40 :      
+                    if x <= 40 and x >= -40 :    
                         if y > 0 and y < 300:
                             grid.add(2)
                             if y < 200:
@@ -71,18 +70,16 @@ class MLPlay:
 
             for coin in scene_info["coins"]:
                 if coin[0] < self.car_pos[0] - 20 and coin[1] < self.car_pos[1] - 30:
-                    left += 1
+                    left += self.car_pos[0] - coin[0]
                 if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1] - 30:
-                    right += 1
-                if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1] - 30:
-                    middle += 1
-            if left == 0 and right == 0:
+                    right += coin[0] - self.car_pos
+            if left <= 20 and right <= 20:
                 side = 0
-            elif left >= right and left >= middle:
+            elif left <= right:
                 side = -1
-            elif right >= left and right >= middle:
+            elif right <= left:
                 side = 1
-            elif middle >= left and middle >= right:
+            else:
                 side = 0
             return move(grid= grid, speed_ahead = speed_ahead, side = side)
             
@@ -98,9 +95,9 @@ class MLPlay:
                     return ["SPEED"]
             else:
                 if (2 not in grid): # Check forward 
-                    if side == -1 and 4 not in grid:
+                    if side == -1 and 4 not in grid and 1 not in grid:
                         return ["SPEED", "MOVE_LEFT"]
-                    elif side == 1 and 6 not in grid:
+                    elif side == 1 and 6 not in grid and 3 not in grid:
                         return ["SPEED", "MOVE_RIGHT"]
                     else:
                         # Back to lane center
