@@ -70,15 +70,14 @@ class MLPlay:
                             grid.add(4)
 
             for coin in scene_info["coins"]:
-                if coin[0] < self.car_pos[0] - 20 and coin[1] < self.car_pos[1] - 30:
+                if coin[0] < self.car_pos[0] - 20 and coin[1] < self.car_pos[1]:
                     left += self.car_pos[0] - coin[0]
-                if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1] - 30:
+                if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
                     right += coin[0] - self.car_pos[0]
-                if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1] - 30:
-                    middle += 10
-            if left <= 20 and right <= 20:
-                side = 0
-            elif middle <= left and middle <= right:
+                if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
+                    middle += 30
+
+            if middle <= left and middle <= right:
                 side = 0
             elif left <= right and left <= middle:
                 side = -1
@@ -88,7 +87,7 @@ class MLPlay:
                 side = 0
             return move(grid= grid, speed_ahead = speed_ahead, side = side)
             
-        def move(grid, speed_ahead, side): 
+        def move(grid, speed_ahead, side):
             # if self.player_no == 0:
             #     print(grid)
             if len(grid) == 0:
@@ -97,7 +96,11 @@ class MLPlay:
                 elif side == 1:
                     return ["SPEED", "MOVE_RIGHT"]
                 else:
-                    return ["SPEED"]
+                    if self.car_pos[0] > self.lanes[self.car_lane]:
+                        return ["SPEED", "MOVE_LEFT"]
+                    elif self.car_pos[0] < self.lanes[self.car_lane]:
+                        return ["SPEED", "MOVE_RIGHT"]
+                    else :return ["SPEED"]
             else:
                 if (2 not in grid): # Check forward 
                     if side == -1 and 4 not in grid and 1 not in grid:
@@ -108,7 +111,7 @@ class MLPlay:
                         # Back to lane center
                         if self.car_pos[0] > self.lanes[self.car_lane]:
                             return ["SPEED", "MOVE_LEFT"]
-                        elif self.car_pos[0 ] < self.lanes[self.car_lane]:
+                        elif self.car_pos[0] < self.lanes[self.car_lane]:
                             return ["SPEED", "MOVE_RIGHT"]
                         else :return ["SPEED"]
                 else:
