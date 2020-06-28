@@ -1,8 +1,4 @@
 class MLPlay:
-    def dis(self, num1, num2):
-        import math
-        return math.sqrt(num1*num1 + num2*num2)
-        
     def __init__(self, player):
         self.player = player
         if self.player == "player1":
@@ -30,6 +26,10 @@ class MLPlay:
         |  7 |  8 |  9 |
         |    |    |    |       
         """
+        def dis(num1, num2):
+            import math
+            return math.sqrt(num1*num1 + num2*num2)
+
         def check_grid():
             grid = set()
             speed_ahead = 100
