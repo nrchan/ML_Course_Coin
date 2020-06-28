@@ -1,4 +1,8 @@
 class MLPlay:
+    def dis(self, num1, num2):
+        import math
+        return math.sqrt(num1*num1 + num2*num2)
+        
     def __init__(self, player):
         self.player = player
         if self.player == "player1":
@@ -180,7 +184,3 @@ class MLPlay:
         Reset the status
         """
         pass
-
-    def dis(self, num1, num2):
-        import math
-        return math.sqrt(num1*num1 + num2*num2)
