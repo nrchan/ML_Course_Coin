@@ -75,7 +75,7 @@ class MLPlay:
                 if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
                     right += coin[0] - self.car_pos[0]
                 if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
-                    middle += 30
+                    middle += 150
 
             if middle <= left and middle <= right:
                 side = 0
