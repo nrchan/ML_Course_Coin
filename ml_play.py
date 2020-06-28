@@ -71,11 +71,11 @@ class MLPlay:
 
             for coin in scene_info["coins"]:
                 if coin[0] < self.car_pos[0] - 20 and coin[1] < self.car_pos[1]:
-                    left += self.car_pos[0] - coin[0]
+                    left += min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
                 if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
-                    right += coin[0] - self.car_pos[0]
+                    right += min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
                 if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
-                    middle += 150
+                    middle += min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
 
             if middle <= left and middle <= right:
                 side = 0
@@ -180,3 +180,7 @@ class MLPlay:
         Reset the status
         """
         pass
+
+    def dis(self, num1, num2):
+        import math
+        return math.sqrt(num1*num1 + num2*num2)
