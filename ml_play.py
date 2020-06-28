@@ -102,7 +102,7 @@ class MLPlay:
                         return ["SPEED", "MOVE_RIGHT"]
                     else :return ["SPEED"]
             else:
-                if (2 not in grid): # Check forward 
+                if (2 not in grid): # Check forward
                     if side == -1 and 4 not in grid and 1 not in grid:
                         return ["SPEED", "MOVE_LEFT"]
                     elif side == 1 and 6 not in grid and 3 not in grid:
@@ -133,14 +133,30 @@ class MLPlay:
                                 return ["BRAKE"]
                     if (self.car_pos[0] < 60 ):
                         return ["SPEED", "MOVE_RIGHT"]
+                    if side == -1 and 4 not in grid and 1 not in grid:
+                        return ["SPEED", "MOVE_LEFT"]
+                    if side == 1 and 6 not in grid and 3 not in grid:
+                        return ["SPEED", "MOVE_RIGHT"]
+                    if (1 not in grid) and (4 not in grid) and (7 not in grid) and side == -1: # turn left 
+                        return ["SPEED", "MOVE_LEFT"]
+                    if (3 not in grid) and (6 not in grid) and (9 not in grid) and side == 1: # turn right
+                        return ["SPEED", "MOVE_RIGHT"]
                     if (1 not in grid) and (4 not in grid) and (7 not in grid): # turn left 
                         return ["SPEED", "MOVE_LEFT"]
                     if (3 not in grid) and (6 not in grid) and (9 not in grid): # turn right
+                        return ["SPEED", "MOVE_RIGHT"]
+                    if (1 not in grid) and (4 not in grid) and side == -1: # turn left 
+                        return ["SPEED", "MOVE_LEFT"]
+                    if (3 not in grid) and (6 not in grid) and side == 1: # turn right
                         return ["SPEED", "MOVE_RIGHT"]
                     if (1 not in grid) and (4 not in grid): # turn left 
                         return ["SPEED", "MOVE_LEFT"]
                     if (3 not in grid) and (6 not in grid): # turn right
                         return ["SPEED", "MOVE_RIGHT"]
+                    if (4 not in grid) and (7 not in grid) and side == -1: # turn left 
+                        return ["MOVE_LEFT"]    
+                    if (6 not in grid) and (9 not in grid) and side == 1: # turn right
+                        return ["MOVE_RIGHT"]
                     if (4 not in grid) and (7 not in grid): # turn left 
                         return ["MOVE_LEFT"]    
                     if (6 not in grid) and (9 not in grid): # turn right
