@@ -75,11 +75,11 @@ class MLPlay:
 
             for coin in scene_info["coins"]:
                 if coin[0] < self.car_pos[0] - 20 and coin[1] < self.car_pos[1]:
-                    left += min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
+                    left = min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
                 if coin[0] > self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
-                    right += min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
+                    right = min(right, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
                 if coin[0] > self.car_pos[0] - 20 and coin[0] < self.car_pos[0] + 20 and coin[1] < self.car_pos[1]:
-                    middle += min(left, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
+                    middle = min(middle, dis(self.car_pos[0] - coin[0], self.car_pos[1] - coin[1]))
 
             if middle <= left and middle <= right:
                 side = 0
